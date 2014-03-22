@@ -1,4 +1,8 @@
 <?php
+	if (count(get_included_files()) == 1) {
+		die();
+	}
+
 	function kosher($path) {
 		$path = '/var/videos/' . $path;
 		return (dirname(realpath($path)) === '/var/videos' && file_exists($path));
