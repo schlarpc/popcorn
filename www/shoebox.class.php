@@ -51,18 +51,18 @@ class Shoebox {
     }
     
     private function updateLibrary() {
-        if (!is_dir('./shoebox_cache/')) {
-            mkdir('./shoebox_cache/', 0777, true);
+        if (!is_dir('/tmp/shoebox_cache/')) {
+            mkdir('/tmp/shoebox_cache/', 0777, true);
         }
-        if (!file_exists('./shoebox_cache/data_en.zip') || time() - filemtime('./shoebox_cache/data_en.zip') > 24 * 60 * 60) {
-            file_put_contents('./shoebox_cache/data_en.zip', $this->getHTTP('http://showsbox.ru/data/data_en.zip'));
-            $zip = zip_open('./shoebox_cache/data_en.zip');
+        if (!file_exists('/tmp/shoebox_cache/data_en.zip') || time() - filemtime('/tmp/shoebox_cache/data_en.zip') > 24 * 60 * 60) {
+            file_put_contents('/tmp/shoebox_cache/data_en.zip', $this->getHTTP('http://showsbox.ru/data/data_en.zip'));
+            $zip = zip_open('/tmp/shoebox_cache/data_en.zip');
             do {
                 $entry = zip_read($zip);
                 if (is_resource($entry)) {
                     $name = zip_entry_name($entry);
                     if ($name === 'movies_lite.json' || $name === 'tv_lite.json') {
-                        file_put_contents("./shoebox_cache/" . $name, zip_entry_read($entry, zip_entry_filesize($entry)));
+                        file_put_contents("/tmp/shoebox_cache/" . $name, zip_entry_read($entry, zip_entry_filesize($entry)));
                     }
                 }
             } while ($entry);
@@ -70,13 +70,13 @@ class Shoebox {
     }
     
     public function getMovieList() {
-        $list = $this->getLocalJSON('./shoebox_cache/movies_lite.json');
+        $list = $this->getLocalJSON('/tmp/shoebox_cache/movies_lite.json');
         usort($list, array($this, 'sortByRating'));
         return $list;
     }
     
     public function getTVList() {
-        $list = $this->getLocalJSON('./shoebox_cache/tv_lite.json');
+        $list = $this->getLocalJSON('/tmp/shoebox_cache/tv_lite.json');
         usort($list, array($this, 'sortByRating'));
         return $list;
     }
