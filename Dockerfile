@@ -52,7 +52,7 @@ RUN cd /tmp/x264 && \
 
 # ... xvidcore
 
-RUN wget -O /tmp/xvidcore.tar.gz http://downloads.xvid.org/downloads/xvidcore-1.3.2.tar.gz 
+RUN wget -O /tmp/xvidcore.tar.gz http://downloads.xvid.org/downloads/xvidcore-1.3.3.tar.gz 
 RUN mkdir /tmp/xvidcore && \
     tar xfz /tmp/xvidcore.tar.gz -C /tmp/xvidcore --strip-components 1
 RUN cd /tmp/xvidcore/build/generic && \
@@ -79,7 +79,7 @@ ENV PATH /opt/rtmpd:$PATH
 # Install youtube-dl
 
 RUN mkdir /opt/youtube-dl && \
-    wget --no-check-certificate -O /opt/youtube-dl/youtube-dl https://yt-dl.org/downloads/2014.03.18.1/youtube-dl && \
+    wget --no-check-certificate -O /opt/youtube-dl/youtube-dl https://yt-dl.org/downloads/2014.05.05/youtube-dl && \
     chmod a+x /opt/youtube-dl/youtube-dl
 ENV PATH /opt/youtube-dl:$PATH
 
