@@ -55,7 +55,7 @@ class Shoebox {
             mkdir('/tmp/shoebox_cache/', 0777, true);
         }
         if (!file_exists('/tmp/shoebox_cache/data_en.zip') || time() - filemtime('/tmp/shoebox_cache/data_en.zip') > 24 * 60 * 60) {
-            file_put_contents('/tmp/shoebox_cache/data_en.zip', $this->getHTTP('http://showsbox.ru/data/data_en.zip'));
+            file_put_contents('/tmp/shoebox_cache/data_en.zip', $this->getHTTP('http://mobapps.cc/data/data_en.zip'));
             $zip = zip_open('/tmp/shoebox_cache/data_en.zip');
             do {
                 $entry = zip_read($zip);
